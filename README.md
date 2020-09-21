@@ -26,7 +26,7 @@ Users will see project dashboards that show information about the project time e
 
 ### Functional Requirements  
 
-####As a developer, I want to log my time on projects so my hours are documented and can be seen by others.  
+#### As a developer, I want to log my time on projects so my hours are documented and can be seen by others.  
 
  
 
@@ -212,7 +212,7 @@ Class Diagram Description: One or two lines for each class to describe use of in
 
 ### Scrum Roles 
 
-**8UI Specialist:** Michelle Fordos 
+**UI Specialist:** Michelle Fordos 
 
 **Product Owner:** Drew Mueller 
 
@@ -226,7 +226,7 @@ https://github.com/Richard-Woessner/TimeLogr
 
 ### Scrum Board  
 
-Ent. App Dev | Trello 
+https://trello.com/b/SuJSKsyO/ent-app-dev
 
  
 
@@ -234,7 +234,7 @@ Ent. App Dev | Trello
 
 ### Milestone 1:  
 
-Business logic and persistence team members should: 
+#### Business logic and persistence team members should: 
 
 Create interfaces for service layer. 
 
@@ -244,15 +244,15 @@ Swap those interfaces and stubs with other team members.
 
 Program actual implementation classes, which implement the same interfaces as the stub/mock objects. 
 
-User Interface 
+#### User Interface 
 
-      Create basic web page to view projects 
+Create basic web page to view projects 
 
 Use of interfaces to coordinate listening from backend tier to UI tier 
 
 Finalize JSON output 
 
-Backend, business, persistence logic package. 
+#### Backend, business, persistence logic package. 
 
 Create endpoints to view project details 
 
@@ -260,7 +260,7 @@ Create a controller
 
 Create DTO 
 
-Write Unit Tests for each non-UI class. 
+#### Write Unit Tests for each non-UI class. 
 
 Write unit tests against the interface type. 
 
