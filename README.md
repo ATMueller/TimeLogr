@@ -21,7 +21,9 @@ Users will see project dashboards that show information about the project time e
 
 ### Storyboard  
 
-(screen mockups): Invision, FluidUI, Powerpoint, paint, etc... will be fine. 
+**Login Page:** https://mailuc-my.sharepoint.com/personal/woessnrw_mail_uc_edu/Documents/Microsoft%20Teams%20Chat%20Files/Login.png
+**Dev Page:** https://mailuc-my.sharepoint.com/personal/woessnrw_mail_uc_edu/Documents/Microsoft%20Teams%20Chat%20Files/DevPage.png
+**Client Page:** https://mailuc-my.sharepoint.com/personal/woessnrw_mail_uc_edu/Documents/Microsoft%20Teams%20Chat%20Files/ClientPage.png
 
 
 ### Functional Requirements  
