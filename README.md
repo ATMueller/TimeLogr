@@ -152,9 +152,7 @@ Then: The new total time estimates and budget will be saved to Project A.
 
 ### Class Diagram 
 
-UML-based class diagram. 
-
-Class Diagram Description: One or two lines for each class to describe use of interfaces,  classes and resources, interfaces, etc. Don't worry about putting more than a few words to each class; this does not need to be thorough. 
+https://mailuc-my.sharepoint.com/personal/woessnrw_mail_uc_edu/Documents/Microsoft%20Teams%20Chat%20Files/Untitled%20Diagram.png
 
 
 ### JSON Schema 
