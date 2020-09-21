@@ -30,23 +30,23 @@ Users will see project dashboards that show information about the project time e
 
  
 
-1. Given: A list of current projects for a client are available 
+Given: A list of current projects for a client are available 
 
-1. When: The user/service selects a project, Project A 
+When: The user/service selects a project, Project A 
 
-1. When: The user/service adds 2 hours worked and a comment about what they worked on 
+When: The user/service adds 2 hours worked and a comment about what they worked on 
 
-1. Then: The selected project, Project A, will be updated with the user’s 2 hours and comment towards the running total 
+Then: The selected project, Project A, will be updated with the user’s 2 hours and comment towards the running total 
 
  
 
-2. Given: A list of current projects for a client are available 
+Given: A list of current projects for a client are available 
 
-2. When: The user/service selects a project, Project A 
+When: The user/service selects a project, Project A 
 
-2. When: The user/service adds 10 hours worked and a comment about what they worked on, going over the estimated time to complete project 
+When: The user/service adds 10 hours worked and a comment about what they worked on, going over the estimated time to complete project 
 
-2. Then: The selected project, Project A, will be updated with the user’s 10 hours and comment towards the running total but save a warning to be displayed on the project level 
+Then: The selected project, Project A, will be updated with the user’s 10 hours and comment towards the running total but save a warning to be displayed on the project level 
 
  
 
@@ -58,19 +58,19 @@ Users will see project dashboards that show information about the project time e
 
  
 
-1. Given: Project data are available 
+Given: Project data are available 
 
-1. When: A user/service searches for a project name: “Project A” 
+When: A user/service searches for a project name: “Project A” 
 
-1. Then: TimeLogr will return any results that match “Project A” and show all logged time, developers that worked on that project and how long each worked for, hourly rates, total project cost and total time estimate. 
+Then: TimeLogr will return any results that match “Project A” and show all logged time, developers that worked on that project and how long each worked for, hourly rates, total project cost and total time estimate. 
 
  
 
-2. Given: Project data are available 
+Given: Project data are available 
 
-2. When: A user that contributed to Project A searches for a project name: “Project A” 
+When: A user that contributed to Project A searches for a project name: “Project A” 
 
-2. Then: TimeLogr will return any results that match “Project A” with the developer’s logged time, comments, and dates for the project, their hourly rate and a total of how much time they individually spent.  
+Then: TimeLogr will return any results that match “Project A” with the developer’s logged time, comments, and dates for the project, their hourly rate and a total of how much time they individually spent.  
 
  
 
@@ -82,61 +82,61 @@ Users will see project dashboards that show information about the project time e
 
  
 
-1. Given: Project data are available 
+Given: Project data are available 
 
-1. When: A user/service searches for a project name: “Project A” 
+When: A user/service searches for a project name: “Project A” 
 
-1. Then: TimeLogr will return any results that match “Project A” within the client’s projects and show project details, developers that worked on that project and how long each worked for, hourly rates, total project cost and total time estimate. 
-
- 
-
-2. Given: Project data are available 
-
-2. When: A user/service searches for a project name: “Project 5u42839y” 
-
-2. Then: TimeLogr will not return any results  
+Then: TimeLogr will return any results that match “Project A” within the client’s projects and show project details, developers that worked on that project and how long each worked for, hourly rates, total project cost and total time estimate. 
 
  
 
-3. Given: A list of contributing developers on Project A 
+Given: Project data are available 
 
-3. When: A user selects an individual developer, John Doe 
+When: A user/service searches for a project name: “Project 5u42839y” 
 
-3. Then: TimeLogr will show contact information for John Doe 
-
- 
-
-4. Given: The user is logged in and has selected to create a new project 
-
-4. When: The user enters a valid project name, “Project B” details on total time estimates and budget 
-
-4. Then: The new project will be saved under the client profile and be available for users within a client company and developers to see 
+Then: TimeLogr will not return any results  
 
  
 
-5. Given: The user is logged in and has selected to create a new project 
+Given: A list of contributing developers on Project A 
 
-5. When: The user enters an invalid project name, “Project A” and details on total time estimates and budget 
+When: A user selects an individual developer, John Doe 
 
-5. Then: Project A will not be saved as it already exists for that client.  
-
- 
-
-6. Given: The user is logged in and has selected to create a new project 
-
-6. When: The user enters an invalid project name, “ <*’ ” and details on total time estimates and budget 
-
-6. Then: Project A will not be saved because it contains a character that is not valid for a project name 
+Then: TimeLogr will show contact information for John Doe 
 
  
 
-7. Given: The user is logged in and has selected to edit an existing project 
+Given: The user is logged in and has selected to create a new project 
 
-7. When: The user enters a valid project name, “Project A” and 
+When: The user enters a valid project name, “Project B” details on total time estimates and budget 
 
-7. When: The user updates details on total time estimates and budget 
+Then: The new project will be saved under the client profile and be available for users within a client company and developers to see 
 
-7. Then: The new total time estimates and budget will be saved to Project A.  
+ 
+
+Given: The user is logged in and has selected to create a new project 
+
+When: The user enters an invalid project name, “Project A” and details on total time estimates and budget 
+
+Then: Project A will not be saved as it already exists for that client.  
+
+ 
+
+Given: The user is logged in and has selected to create a new project 
+
+When: The user enters an invalid project name, “ <*’ ” and details on total time estimates and budget 
+
+Then: Project A will not be saved because it contains a character that is not valid for a project name 
+
+ 
+
+Given: The user is logged in and has selected to edit an existing project 
+
+When: The user enters a valid project name, “Project A” and 
+
+When: The user updates details on total time estimates and budget 
+
+Then: The new total time estimates and budget will be saved to Project A.  
 
  
 
