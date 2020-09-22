@@ -157,43 +157,47 @@ https://mailuc-my.sharepoint.com/personal/woessnrw_mail_uc_edu/Documents/Microso
 
 ### JSON Schema 
 
-{ 
+    { 
 
-  "Client": { 
+      "Client": { 
 
-    "Name": "string", 
+        "Name": "string", 
 
-    "Projects": { 
+        "Projects": { 
 
-      "Project": { 
+          "Project": { 
 
-        "ID": integer, 
+            "ID": integer, 
 
-        "Name": "String", 
+            "Name": "String", 
 
-        "EstimatedCost": Double, 
+            "EstimatedCost": Double, 
 
-        "EstimatedTime": Double, 
+            "EstimatedTime": Double, 
 
-        "Developer": { 
-
-          "ID": integer, 
-
-          "Name": "String", 
-
-          "HourlyPay": Double, 
-
-          "LoggedTimes": { 
-
-            "LoggedTime": { 
+            "Developer": { 
 
               "ID": integer, 
 
-              "TimeDuration": double, 
+              "Name": "String", 
 
-              "Date": timestamp, 
+              "HourlyPay": Double, 
 
-              "Comment": "String" 
+              "LoggedTimes": { 
+
+                "LoggedTime": { 
+
+                  "ID": integer, 
+
+                  "TimeDuration": double, 
+
+                  "Date": timestamp, 
+
+                  "Comment": "String" 
+
+                } 
+
+              } 
 
             } 
 
@@ -204,10 +208,6 @@ https://mailuc-my.sharepoint.com/personal/woessnrw_mail_uc_edu/Documents/Microso
       } 
 
     } 
-
-  } 
-
-} 
 
 
 ### Scrum Roles 
