@@ -14,7 +14,7 @@ https://teams.microsoft.com/l/file/52e64457-c458-4952-8893-3ec3367dfbc5?tenantId
 
 ### Introduction 
 
-TimeLogr is an enterprise web application that allows developers and clients to manage time reporting for projects. Developers will be able to log their time for various projects they work on while leaving comments on each time entry for others to see. Clients using TimeLogr can create new projects and maintain cost and time estimates. 
+TimeLogr :test: is an enterprise web application that allows developers and clients to manage time reporting for projects. Developers will be able to log their time for various projects they work on while leaving comments on each time entry for others to see. Clients using TimeLogr can create new projects and maintain cost and time estimates. 
 
 Users will see project dashboards that show information about the project time estimates, cost, contributors, total hours logged and comments. This makes viewing project status easy so staying within cost and time estimates is too.  
 
