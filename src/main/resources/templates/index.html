@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TimeLogr</title>
+    <link rel="stylesheet" href="/css/test.css">
+</head>
+<body>
+    THIS IS THE INDEX
+    <a th:href="@{page1}">page1</a>
+    <table>
+        <tr th:each="employee:${employee}">
+            <td th:text="${employee.id}"></td>
+
+        </tr>
+    </table>
+</body>
+</html>
