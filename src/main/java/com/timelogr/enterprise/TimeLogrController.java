@@ -26,8 +26,30 @@ public class TimeLogrController {
         return "index"; //STARTS PROGRAM IN THE resources/templates/index.html
     }
 
-    @RequestMapping("/page1")
-        public String page1() {
-            return "page1";
+    @RequestMapping("/clients")
+    public String Clients(Model model){
+        model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
+        return "clients";
     }
+
+    @RequestMapping("/settings")
+    public String Settings() {
+        return "settings";
+    }
+
+    @RequestMapping("/newproject")
+    public String NewProject() {
+        return "newproject";
+    }
+
+    @RequestMapping("/projectdetails")
+    public String projectdetails(Model model){
+        model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
+        return "projectdetails"; //STARTS PROGRAM IN THE resources/templates/index.html
+    }
+    //pass in project ID
+
+    //@RequestMapping("/logTime")
+    // go to servicestub and call timeLog DAO save
+
 }

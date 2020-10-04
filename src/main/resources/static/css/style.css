@@ -1,0 +1,29 @@
+.dashboard-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.panel-left {
+    flex: 50%;
+    margin: 5% 5%;
+}
+
+.panel-right {
+    flex: 30%;
+    margin: 5% 5%;
+}
+
+h1 {
+    margin: auto;
+    text-align: center;
+}
+
+.content-container {
+    margin: 5% auto;
+    padding: 0 5%;
+}
+.center-form {
+    width: 50%;
+    margin: auto;
+}
