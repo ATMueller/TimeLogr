@@ -28,7 +28,7 @@
             <tbody>
 
             <tr th:each="employee:${employee}">
-                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.employeeID}"></td>
                 <td>
                     <a role="button" th:href="@{projectdetails}" class="btn btn-secondary btn-lg btn-block">View Client Projects</a>
                 </td>
@@ -56,7 +56,6 @@
 </div>
 
 </body>
-</html>
 
 </body>
 </html>
