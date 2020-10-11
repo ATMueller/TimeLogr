@@ -1,8 +1,7 @@
-package com.timelogr.enterprise;
+package com.timelogr.enterprise.service;
 
+import com.timelogr.enterprise.dto.employee;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;

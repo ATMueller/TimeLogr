@@ -1,4 +1,4 @@
-package com.timelogr.enterprise;
+package com.timelogr.enterprise.dto;
 
 public class client {
     private long id;
