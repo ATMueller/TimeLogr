@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TimeLogrServices {
+public class TimeLogrServices implements ITimeLogr {
     //TESTING DUMMY DATA#######################################
     public static List<employee> employeeList = new ArrayList<>();
     static{
