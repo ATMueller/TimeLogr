@@ -1,34 +1,71 @@
 package com.timelogr.enterprise;
 
+import com.timelogr.enterprise.dto.TimeLog;
+import com.timelogr.enterprise.service.TimeLogrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-//ALL WEB FILES GO IN THE resources/templates DIRECTORY
+import java.util.List;
+
 @Controller
-@RequestMapping("/")
 public class TimeLogrController {
-    private TimeLogrServices timeLogrServices;
-
 
     @Autowired
-    public TimeLogrController(TimeLogrServices timeLogrServices){
-        super();
-        this.timeLogrServices = timeLogrServices;
-    }
+    TimeLogrService timeLogrService;
 
-
-
+    /**
+     *
+     * Root endpoint for index page
+     * @return index.html
+     */
     @RequestMapping("/")
     public String index(Model model){
-        model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
-        return "index"; //STARTS PROGRAM IN THE resources/templates/index.html
+        TimeLog timeLog = new TimeLog();
+        model.addAttribute(timeLog);
+        model.addAttribute("allLogs", timeLogrService.getAllLoggedTime());
+        return "index";
     }
+
+    /**
+     * Developers saves a new time logged
+     * @param timeLog
+     * @return index
+     */
+    @RequestMapping("/saveTimeLog")
+    public String saveTimeLog(TimeLog timeLog) {
+        timeLogrService.save(timeLog);
+        return "redirect:";
+    }
+
+    /**
+     * Save log time for testing
+     * @param timeLog
+     * @return
+     */
+    @PostMapping(value= "/", consumes="application/json", produces="application/json")
+    public TimeLog newTimeLog(@RequestBody TimeLog timeLog) {
+        TimeLog newLog = timeLogrService.save(timeLog);
+        return newLog;
+    }
+
+    /**
+     * Return all logged time for testing
+     * @param
+     * @return
+     */
+    @GetMapping("/timeLogs")
+    @ResponseBody
+    public List<TimeLog> getAllLoggedTime() {
+        return timeLogrService.getAllLoggedTime();
+    }
+
+
 
     @RequestMapping("/clients")
     public String Clients(Model model){
-        model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
+        // model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
         return "clients";
     }
 
@@ -44,8 +81,8 @@ public class TimeLogrController {
 
     @RequestMapping("/projectdetails")
     public String projectdetails(Model model){
-        model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
-        return "projectdetails"; //STARTS PROGRAM IN THE resources/templates/index.html
+        // model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
+        return "projectdetails";
     }
     //pass in project ID
 

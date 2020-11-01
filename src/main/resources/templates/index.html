@@ -24,14 +24,17 @@
                     <th scope="col">Project Id</th>
                     <th scope="col">Time</th>
                     <th scope="col">Client</th>
+                    <th scope="col">Project</th>
+                    <th scope="col">View More</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <tr th:each="employee:${employee}">
-                    <td th:text="${employee.id}"></td>
-                    <td>00:00</td>
-                    <td>Client Name</td>
+                <tr th:each="timeLog:${allLogs}">
+                    <td th:text="${timeLog.id}"></td>
+                    <td th:text="${timeLog.duration}"></td>
+                    <td th:text="${timeLog.client}">Client Name</td>
+                    <td th:text="${timeLog.project}">Project Name</td>
                     <td>
                         <a role="button" th:href="@{projectdetails}" class="btn btn-secondary">Project Details</a>
                     </td>
@@ -43,23 +46,31 @@
 
         <div class="panel-right">
             <h4>Developer Time Logger</h4>
-            <form action="#" th:action="@{/logTime}" th:object="${employee}" method="GET">
+            <form action="#" th:action="@{/saveTimeLog}" th:object="${timeLog}" method="GET">
                 <div class="form-group">
                     <label for="clientInput">Client</label>
-                    <input type="text" class="form-control" id="clientInput" placeholder="Client">
+                    <input type="text" class="form-control" id="clientInput" placeholder="Client" th:field="*{client}">
 
                 </div>
                 <div class="form-group">
                     <label for="projectInput">Project</label>
-                    <input type="text" class="form-control" id="projectInput" placeholder="Project">
+                    <input type="text" class="form-control" id="projectInput" placeholder="Project" th:field="*{project}">
                 </div>
                 <div class="form-group">
                     <label for="hoursInput">Enter Time</label>
-                    <input type="text" class="form-control" id="hoursInput" placeholder="00:00">
+                    <input type="text" class="form-control" id="hoursInput" placeholder="00:00" th:field="*{duration}">
+                </div>
+                <div class="form-group">
+                    <label for="idInput">Project ID</label>
+                    <input type="text" class="form-control" id="idInput" placeholder="00:00" th:field="*{id}">
                 </div>
                 <button name="submit" value="0" type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+    </div>
+
+    <div class="center-form">
+        Development notes: this is the most functional page of our site that illustrates saving time log data and showing the total time log list
     </div>
 
 </body>
