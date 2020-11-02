@@ -1,55 +1,57 @@
 package com.timelogr.enterprise;
 
+import com.timelogr.enterprise.service.ITimeLogrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-//ALL WEB FILES GO IN THE resources/templates DIRECTORY
+// ALL WEB FILES GO IN THE resources/templates DIRECTORY
 @Controller
 @RequestMapping("/")
 public class TimeLogrController {
-    private TimeLogrServices timeLogrServices;
 
+    private final ITimeLogrService timeLogrService;
 
     @Autowired
-    public TimeLogrController(TimeLogrServices timeLogrServices){
+    public TimeLogrController(ITimeLogrService timeLogrService){
         super();
-        this.timeLogrServices = timeLogrServices;
+        this.timeLogrService = timeLogrService;
     }
 
-
-
+    /**
+     * Starts Program in the resources/templates/index.html
+     */
     @RequestMapping("/")
     public String index(Model model){
-        model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
-        return "index"; //STARTS PROGRAM IN THE resources/templates/index.html
+        model.addAttribute("employee", this.timeLogrService.getAllEmployees());
+        return "index";
     }
 
     @RequestMapping("/clients")
-    public String Clients(Model model){
-        model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
+    public String clients(Model model){
+        model.addAttribute("employee", this.timeLogrService.getAllEmployees());
         return "clients";
     }
 
     @RequestMapping("/settings")
-    public String Settings() {
+    public String settings() {
         return "settings";
     }
 
     @RequestMapping("/newproject")
-    public String NewProject() {
+    public String newProject() {
         return "newproject";
     }
 
     @RequestMapping("/projectdetails")
-    public String projectdetails(Model model){
-        model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
-        return "projectdetails"; //STARTS PROGRAM IN THE resources/templates/index.html
+    public String projectDetails(Model model){
+        model.addAttribute("employee", this.timeLogrService.getAllEmployees());
+        return "projectdetails";
     }
-    //pass in project ID
+    //pass in Project ID
 
     //@RequestMapping("/logTime")
-    // go to servicestub and call timeLog DAO save
+    // go to service stub and call TimeLog DAO save
 
 }

@@ -2,65 +2,67 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>TimeLogr</title>
+    <title>Home - My Projects</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-   <div th:replace="fragments/topnav :: navbar-dev"></div>
+<div th:replace="fragments/topnav :: navbar-dev"></div>
+<div class="dashboard-content">
+    <div class="panel-left">
+        <h3>My Recent Projects</h3>
+        <table class="table table-striped table-light">
+            <thead>
+            <tr>
+                <th scope="col">Project Id</th>
+                <th scope="col">Time</th>
+                <th scope="col">Client</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee:${employee}">
+                <td th:text="${employee.id}"></td>
+                <td>00:00</td>
+                <td>Client Name</td>
+                <td>
+                    <a role="button" th:href="@{projectdetails}" class="btn btn-secondary">Project Details</a>
+                </td>
+            </tr>
 
-    <div class="dashboard-content">
-        <div class="panel-left">
-            <h3>My Recent Projects</h3>
-            <table class="table table-striped table-light">
-                <thead>
-                <tr>
-                    <th scope="col">Project Id</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">Client</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <tr th:each="employee:${employee}">
-                    <td th:text="${employee.id}"></td>
-                    <td>00:00</td>
-                    <td>Client Name</td>
-                    <td>
-                        <a role="button" th:href="@{projectdetails}" class="btn btn-secondary">Project Details</a>
-                    </td>
-                </tr>
-
-                </tbody>
-            </table>
-        </div>
-
-        <div class="panel-right">
-            <h4>Developer Time Logger</h4>
-            <form action="#" th:action="@{/logTime}" th:object="${employee}" method="GET">
-                <div class="form-group">
-                    <label for="clientInput">Client</label>
-                    <input type="text" class="form-control" id="clientInput" placeholder="Client">
-
-                </div>
-                <div class="form-group">
-                    <label for="projectInput">Project</label>
-                    <input type="text" class="form-control" id="projectInput" placeholder="Project">
-                </div>
-                <div class="form-group">
-                    <label for="hoursInput">Enter Time</label>
-                    <input type="text" class="form-control" id="hoursInput" placeholder="00:00">
-                </div>
-                <button name="submit" value="0" type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
+            </tbody>
+        </table>
     </div>
-
+    <div class="panel-right">
+        <h4>Developer Time Logger</h4>
+        <form action="#" th:action="@{/logTime}" th:object="${employee}" method="GET">
+            <div class="form-group">
+                <label for="clientInput">Client</label>
+                <input type="text" class="form-control" id="clientInput" placeholder="Client">
+            </div>
+            <div class="form-group">
+                <label for="projectInput">Project</label>
+                <input type="text" class="form-control" id="projectInput" placeholder="Project">
+            </div>
+            <div class="form-group">
+                <label for="hoursInput">Enter Time</label>
+                <input type="text" class="form-control" id="hoursInput" placeholder="00:00">
+            </div>
+            <button name="submit" value="0" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
