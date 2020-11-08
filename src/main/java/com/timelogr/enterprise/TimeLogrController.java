@@ -1,5 +1,6 @@
 package com.timelogr.enterprise;
 
+import com.timelogr.enterprise.dto.Employee;
 import com.timelogr.enterprise.dto.TimeLog;
 import com.timelogr.enterprise.service.TimeLogrService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,7 @@ public class TimeLogrController {
 
     @RequestMapping("/clients")
     public String Clients(Model model){
-        // model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
+        model.addAttribute("employee", this.timeLogrService.getAllEmployees());
         return "clients";
     }
 
@@ -81,7 +82,7 @@ public class TimeLogrController {
 
     @RequestMapping("/projectdetails")
     public String projectdetails(Model model){
-        // model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
+        model.addAttribute("employee", this.timeLogrService.getAllEmployees());
         return "projectdetails";
     }
     //pass in project ID
