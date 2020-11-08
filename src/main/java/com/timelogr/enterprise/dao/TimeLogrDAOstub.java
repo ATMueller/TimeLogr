@@ -16,15 +16,13 @@ public class TimeLogrDAOstub implements TimeLogrDAO {
     HashMap<Integer, TimeLog> allTimeLogs = new HashMap<>();
     @Override
     public TimeLog save(TimeLog timeLog) {
-        Integer timeLogID = timeLog.getId();
-        allTimeLogs.put(timeLogID, timeLog);
+        allTimeLogs.put(timeLog.getId(), timeLog);
         return timeLog;
     }
 
     @Override
     public List<TimeLog> getAllLoggedTime() {
-        List<TimeLog> allLogs = new ArrayList<>(allTimeLogs.values());
-        return allLogs;
+        return new ArrayList<>(allTimeLogs.values());
     }
 
     HashMap<Long, Employee> allEmployees = new HashMap<Long, Employee>();
