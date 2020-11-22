@@ -39,6 +39,18 @@ public class TimeLogrController {
         return "redirect:";
     }
 
+    @RequestMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("allLogs", timeLogrService.getAllLoggedTime());
+        return "login";
+    }
+
+    @GetMapping('\create-account')
+    public String account(Model model) {
+
+        model.addAttribute("account", new account());
+        return "create-project";
+    }
     /**
      * Save log time for testing
      * @param timeLog
@@ -84,6 +96,8 @@ public class TimeLogrController {
         // model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
         return "projectdetails";
     }
+
+
     //pass in project ID
 
     //@RequestMapping("/logTime")
