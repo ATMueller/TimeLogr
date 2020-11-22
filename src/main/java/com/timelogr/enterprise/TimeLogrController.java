@@ -1,6 +1,7 @@
 package com.timelogr.enterprise;
 
 import com.timelogr.enterprise.dto.TimeLog;
+import com.timelogr.enterprise.dto.Account;
 import com.timelogr.enterprise.service.TimeLogrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,10 +46,9 @@ public class TimeLogrController {
         return "login";
     }
 
-    @GetMapping('\create-account')
+    @GetMapping("/create-account")
     public String account(Model model) {
-
-        model.addAttribute("account", new account());
+        model.addAttribute("account", new Account());
         return "create-project";
     }
     /**
