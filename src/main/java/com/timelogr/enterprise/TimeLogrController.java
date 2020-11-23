@@ -1,5 +1,6 @@
 package com.timelogr.enterprise;
 
+import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
 import com.timelogr.enterprise.dto.Account;
 import com.timelogr.enterprise.service.TimeLogrService;
@@ -36,7 +37,7 @@ public class TimeLogrController {
      */
     @RequestMapping("/saveTimeLog")
     public String saveTimeLog(TimeLog timeLog) {
-        timeLogrService.save(timeLog);
+        timeLogrService.saveLog(timeLog);
         return "redirect:";
     }
 
@@ -58,7 +59,7 @@ public class TimeLogrController {
      */
     @PostMapping(value= "/", consumes="application/json", produces="application/json")
     public TimeLog newTimeLog(@RequestBody TimeLog timeLog) {
-        TimeLog newLog = timeLogrService.save(timeLog);
+        TimeLog newLog = timeLogrService.saveLog(timeLog);
         return newLog;
     }
 
@@ -71,6 +72,17 @@ public class TimeLogrController {
     @ResponseBody
     public List<TimeLog> getAllLoggedTime() {
         return timeLogrService.getAllLoggedTime();
+    }
+
+    /**
+     * Return all projects
+     * @param
+     * @return
+     */
+    @GetMapping("/projects")
+    @ResponseBody
+    public List<Project> getAllProjects() {
+        return timeLogrService.getAllProjects();
     }
 
 
@@ -87,8 +99,16 @@ public class TimeLogrController {
     }
 
     @RequestMapping("/newproject")
-    public String NewProject() {
+    public String NewProject(Model model) {
+        Project project = new Project();
+        model.addAttribute(project);
         return "newproject";
+    }
+
+    @RequestMapping("/saveProject")
+    public String NewProject(Project project) {
+        timeLogrService.saveProject(project);
+        return "index";
     }
 
     @RequestMapping("/projectdetails")
@@ -98,9 +118,5 @@ public class TimeLogrController {
     }
 
 
-    //pass in project ID
-
-    //@RequestMapping("/logTime")
-    // go to servicestub and call timeLog DAO save
 
 }

@@ -1,6 +1,7 @@
 package com.timelogr.enterprise.service;
 
 import com.timelogr.enterprise.dao.TimeLogrDAO;
+import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,22 @@ public class TimeLogrServiceStub implements TimeLogrService {
     }
 
     @Override
-    public TimeLog save(TimeLog timeLog) {
-        return timelogrDAO.save(timeLog);
+    public TimeLog saveLog(TimeLog timeLog) {
+        return timelogrDAO.saveLog(timeLog);
     }
 
     @Override
     public List<TimeLog> getAllLoggedTime() {
         return timelogrDAO.getAllLoggedTime();
+    }
+
+    @Override
+    public Project saveProject(Project project) {
+        return timelogrDAO.saveProject(project);
+    }
+
+    @Override
+    public List<Project> getAllProjects() {
+        return timelogrDAO.getAllProjects();
     }
 }

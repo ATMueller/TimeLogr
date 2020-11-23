@@ -1,5 +1,6 @@
 package com.timelogr.enterprise.dao;
 
+import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,9 +13,10 @@ public class SQL implements TimeLogrDAO {
 
     @Autowired
     TimeLogRepository timeLogRepository;
+    ProjectRepository projectRepository;
 
     @Override
-    public TimeLog save(TimeLog timeLog) {
+    public TimeLog saveLog(TimeLog timeLog) {
         TimeLog savedtimelog = timeLogRepository.save(timeLog);
         return savedtimelog;
     }
@@ -27,5 +29,21 @@ public class SQL implements TimeLogrDAO {
             totalLogs.add(timeLog);
         }
         return totalLogs;
+    }
+
+    @Override
+    public Project saveProject(Project project) {
+        Project savedProject = projectRepository.save(project);
+        return savedProject;
+    }
+
+    @Override
+    public List<Project> getAllProjects() {
+        List<Project> allProjects = new ArrayList<>();
+        Iterable<Project> projects = projectRepository.findAll();
+        for (Project project : projects) {
+            allProjects.add(project);
+        }
+        return allProjects;
     }
 }

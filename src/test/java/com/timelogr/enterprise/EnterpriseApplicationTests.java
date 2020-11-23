@@ -22,7 +22,7 @@ class EnterpriseApplicationTests {
         timeLog.setDate(10182020);
         timeLog.setDuration(742);
         timeLog.setId(3);
-        TimeLog newTimeLog = timeLogrService.save(timeLog);
+        TimeLog newTimeLog = timeLogrService.saveLog(timeLog);
     }
 
     @Test
