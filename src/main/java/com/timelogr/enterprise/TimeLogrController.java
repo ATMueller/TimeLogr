@@ -15,7 +15,7 @@ import java.util.List;
 public class TimeLogrController {
 
     @Autowired
-    TimeLogrService timeLogrService;
+    private TimeLogrService timeLogrService;
 
     /**
      *
@@ -50,8 +50,13 @@ public class TimeLogrController {
     }
 
     @GetMapping("/create-account")
-    public String account(Model model) {
-        model.addAttribute("account", new Account());
+    public String saveAccount(Model model) {
+        Account account = new Account();
+        model.addAttribute(account);
+        System.out.println("--------------");
+        System.out.println(timeLogrService.saveAccount(account));
+        timeLogrService.saveAccount(account);
+
         return "login";
     }
     /**

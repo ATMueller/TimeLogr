@@ -1,5 +1,6 @@
 package com.timelogr.enterprise.service;
 
+import com.timelogr.enterprise.dto.Account;
 import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
 
@@ -14,4 +15,8 @@ public interface TimeLogrService {
     Project saveProject(Project project);
 
     List<Project> getAllProjects();
+
+    Account saveAccount(Account account);
+
+    List<Account> getAllAccounts();
 }

@@ -1,8 +1,10 @@
 package com.timelogr.enterprise.service;
 
 import com.timelogr.enterprise.dao.TimeLogrDAO;
+import com.timelogr.enterprise.dto.Account;
 import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,7 @@ public class TimeLogrServiceStub implements TimeLogrService {
         return timelogrDAO.getAllLoggedTime();
     }
 
+    @SneakyThrows
     @Override
     public Project saveProject(Project project) {
         return timelogrDAO.saveProject(project);
@@ -41,4 +44,15 @@ public class TimeLogrServiceStub implements TimeLogrService {
     public List<Project> getAllProjects() {
         return timelogrDAO.getAllProjects();
     }
+
+    @SneakyThrows
+    @Override
+    public Account saveAccount(Account account) { return timelogrDAO.saveAccount(account); }
+
+    @Override
+    public List<Account> getAllAccounts() {
+        return timelogrDAO.getAllAccounts();
+    }
+
+
 }

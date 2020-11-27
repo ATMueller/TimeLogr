@@ -1,5 +1,6 @@
 package com.timelogr.enterprise.dao;
 
+import com.timelogr.enterprise.dto.Account;
 import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
 
@@ -11,7 +12,12 @@ public interface TimeLogrDAO {
 
     List<TimeLog> getAllLoggedTime();
 
-    Project saveProject(Project project);
+    Project saveProject(Project project) throws Exception;
 
     List<Project> getAllProjects();
+
+    Account saveAccount(Account account) throws Exception;
+
+    List<Account> getAllAccounts();
+
 }

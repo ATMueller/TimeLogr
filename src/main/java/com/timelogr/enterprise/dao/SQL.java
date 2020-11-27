@@ -35,7 +35,7 @@ public class SQL implements TimeLogrDAO {
     }
 
     @Override
-    public Project saveProject(Project project) {
+    public Project saveProject(Project project) throws Exception{
         Project savedProject = projectRepository.save(project);
         return savedProject;
     }
@@ -49,4 +49,22 @@ public class SQL implements TimeLogrDAO {
         }
         return allProjects;
     }
+
+    @Override
+    public Account saveAccount(Account account) throws Exception{
+        Account newAccount = accountRepository.save(account);
+        return account;
+    }
+
+    @Override
+    public List<Account> getAllAccounts() {
+        List<Account> allAccounts = new ArrayList<>();
+        Iterable<Account> accounts = accountRepository.findAll();
+        for (Account account : accounts){
+            allAccounts.add(account);
+        }
+        return allAccounts;
+    }
+
+
 }

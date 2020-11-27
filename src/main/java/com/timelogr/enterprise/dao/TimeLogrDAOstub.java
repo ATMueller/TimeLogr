@@ -1,5 +1,6 @@
 package com.timelogr.enterprise.dao;
 
+import com.timelogr.enterprise.dto.Account;
 import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
 import org.springframework.stereotype.Repository;
@@ -34,5 +35,19 @@ public class TimeLogrDAOstub implements TimeLogrDAO {
     @Override
     public List<Project> getAllProjects() {
         return null;
+    }
+
+    HashMap<Integer, Account> allAccounts = new HashMap<>();
+    @Override
+    public Account saveAccount(Account account) {
+        int accountID = account.getId();
+        allAccounts.put(accountID, account);
+        return account;
+    }
+
+    @Override
+    public List<Account> getAllAccounts() {
+        List<Account> allAcc = new ArrayList<>(allAccounts.values());
+        return allAcc;
     }
 }
