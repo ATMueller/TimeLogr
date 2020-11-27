@@ -12,10 +12,9 @@ import java.util.List;
 @Repository("timelogrDAO")
 public class SQL implements TimeLogrDAO {
 
-    @Autowired
-    TimeLogRepository timeLogRepository;
-    ProjectRepository projectRepository;
-    AccountRepository accountRepository;
+    @Autowired TimeLogRepository timeLogRepository;
+    @Autowired ProjectRepository projectRepository;
+    @Autowired AccountRepository accountRepository;
 
 
     @Override

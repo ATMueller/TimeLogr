@@ -3,9 +3,11 @@ package com.timelogr.enterprise.dao;
 import com.timelogr.enterprise.dto.Account;
 import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public interface TimeLogrDAO {
 
     TimeLog saveLog(TimeLog timeLog);

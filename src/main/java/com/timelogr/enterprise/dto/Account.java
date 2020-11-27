@@ -13,7 +13,8 @@ import javax.persistence.*;
 @Entity @Table(name = "ACCOUNT")
 public @Data class Account {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
     private int id;
     private String name;
     private String email;
@@ -21,16 +22,5 @@ public @Data class Account {
     private String password;
     private String type; //DEV OR CLIENT
 
-    @Override
-    public String toString()
-    {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("name", name)
-                .append("email", email)
-                .append("number", number)
-                .append("password", password)
-                .append("type", type)
-                .toString();
-    }
+
 }

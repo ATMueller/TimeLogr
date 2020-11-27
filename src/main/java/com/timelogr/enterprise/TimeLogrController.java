@@ -50,11 +50,11 @@ public class TimeLogrController {
     }
 
     @GetMapping("/create-account")
-    public Account saveAccount(Account account) {
+    public String saveAccount(Account account) {
         System.out.println("--------------");
         System.out.println(account);
         timeLogrService.saveAccount(account);
-        return account;
+        return "login";
     }
     /**
      * Save log time for testing
