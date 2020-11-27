@@ -14,7 +14,7 @@ import javax.persistence.*;
 public @Data class Account {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private int id;
     private String name;
     private String email;
     private String number;

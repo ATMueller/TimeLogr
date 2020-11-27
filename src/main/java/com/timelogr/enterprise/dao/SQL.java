@@ -53,7 +53,7 @@ public class SQL implements TimeLogrDAO {
     @Override
     public Account saveAccount(Account account) throws Exception{
         Account newAccount = accountRepository.save(account);
-        return account;
+        return newAccount;
     }
 
     @Override
