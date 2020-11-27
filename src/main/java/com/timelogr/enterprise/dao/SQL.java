@@ -1,5 +1,6 @@
 package com.timelogr.enterprise.dao;
 
+import com.timelogr.enterprise.dto.Account;
 import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class SQL implements TimeLogrDAO {
     @Autowired
     TimeLogRepository timeLogRepository;
     ProjectRepository projectRepository;
+    AccountRepository accountRepository;
+
 
     @Override
     public TimeLog saveLog(TimeLog timeLog) {

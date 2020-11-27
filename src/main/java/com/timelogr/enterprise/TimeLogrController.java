@@ -43,6 +43,8 @@ public class TimeLogrController {
 
     @RequestMapping("/login")
     public String login(Model model) {
+        Account account = new Account();
+        model.addAttribute(account);
         model.addAttribute("allLogs", timeLogrService.getAllLoggedTime());
         return "login";
     }
@@ -50,7 +52,7 @@ public class TimeLogrController {
     @GetMapping("/create-account")
     public String account(Model model) {
         model.addAttribute("account", new Account());
-        return "create-project";
+        return "login";
     }
     /**
      * Save log time for testing
