@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.*;
 import java.util.Map;
 
 @Repository
@@ -48,6 +49,7 @@ public class TimeLogrDAOstub implements TimeLogrDAO {
     @Override
     public List<Account> getAllAccounts() {
         List<Account> allAcc = new ArrayList<>(allAccounts.values());
+        //String[] allAcc = allAccounts.values().toArray();
         return allAcc;
     }
 }

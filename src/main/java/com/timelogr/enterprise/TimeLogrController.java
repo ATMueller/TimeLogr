@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -22,12 +24,22 @@ public class TimeLogrController {
      * Root endpoint for index page
      * @return index.html
      */
+
     @RequestMapping("/")
+    public String login(Model model, HttpSession session) {
+        Account account = new Account();
+        model.addAttribute(account);
+        session.setAttribute("alert", "0");
+        model.addAttribute("allLogs", timeLogrService.getAllLoggedTime());
+        return "login";
+    }
+
+    @RequestMapping("/home")
     public String index(Model model){
         TimeLog timeLog = new TimeLog();
         model.addAttribute(timeLog);
         model.addAttribute("allLogs", timeLogrService.getAllLoggedTime());
-        return "index";
+        return "home";
     }
 
     /**
@@ -41,19 +53,33 @@ public class TimeLogrController {
         return "redirect:";
     }
 
-    @RequestMapping("/login")
-    public String login(Model model) {
-        Account account = new Account();
-        model.addAttribute(account);
-        model.addAttribute("allLogs", timeLogrService.getAllLoggedTime());
-        return "login";
-    }
-
     @GetMapping("/create-account")
-    public String saveAccount(Account account) {
+    public String saveAccount(Account account,  HttpSession session) {
         System.out.println("--------------");
         System.out.println(account);
         timeLogrService.saveAccount(account);
+        session.setAttribute("alert","1");
+        return "login";
+    }
+    @GetMapping("/check-account")
+    public String loginAccount(Account account, HttpSession session) {
+        System.out.println("--------------");
+        List<Account> acclist = timeLogrService.getAllAccounts();
+        //System.out.println(account.getEmail());
+        System.out.println("----------");
+        //System.out.println(acclist);
+        System.out.println(account);
+        for(Account temp: acclist){
+            System.out.println(temp);
+            if(temp.getEmail().equals(account.getEmail()) && temp.getPassword().equals(account.getPassword())){
+
+                return "redirect:home";
+            }
+            else{
+                session.setAttribute("alert","2");
+            }
+
+        }
         return "login";
     }
     /**
