@@ -112,7 +112,7 @@ public class TimeLogrController {
     @RequestMapping("/saveProject")
     public String NewProject(Project project) {
         timeLogrService.saveProject(project);
-        return "index";
+        return "redirect:";
     }
 
     @RequestMapping("/projectdetails")
