@@ -52,4 +52,15 @@ public class TimeLogrDAOstub implements TimeLogrDAO {
         //String[] allAcc = allAccounts.values().toArray();
         return allAcc;
     }
+
+    @Override
+    public Account findAccountByEmail(String email) {
+        List<Account> allAcc = new ArrayList<>(allAccounts.values());
+        for(Account temp : allAcc){
+            if(temp.getEmail().equals(email)){
+                return temp;
+            }
+        }
+        return null;
+    }
 }

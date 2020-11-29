@@ -22,4 +22,6 @@ public interface TimeLogrDAO {
 
     List<Account> getAllAccounts();
 
+    Account findAccountByEmail(String email);
+
 }

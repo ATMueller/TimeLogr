@@ -19,4 +19,6 @@ public interface TimeLogrService {
     Account saveAccount(Account account);
 
     List<Account> getAllAccounts();
+
+    Account findAccountByEmail(String email);
 }

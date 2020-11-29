@@ -54,5 +54,8 @@ public class TimeLogrServiceStub implements TimeLogrService {
         return timelogrDAO.getAllAccounts();
     }
 
+    @Override
+    public Account findAccountByEmail(String email) { return timelogrDAO.findAccountByEmail(email); }
+
 
 }
