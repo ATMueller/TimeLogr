@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Integer> {
-    @Query(value = "SELECT a FROM account a WHERE a.email = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM account a WHERE a.email = ?1", nativeQuery = true)
     Account findAccountByEmail(String email);
 }

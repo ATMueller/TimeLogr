@@ -77,12 +77,11 @@ public class TimeLogrController {
                     Account userAccount = timeLogrService.findAccountByEmail(temp.getEmail());
                     session.setAttribute("userAccount", userAccount);
                     return "redirect:home";
-                } else {
-                    session.setAttribute("alert", 1);
-                    session.setAttribute("msg", "The Account information you entered is incorrect");
-                    return "login";
                 }
             }
+            session.setAttribute("alert", 1);
+            session.setAttribute("msg", "The Account information you entered is incorrect");
+            return "login";
         }
         return "login";
     }
@@ -97,7 +96,7 @@ public class TimeLogrController {
     @RequestMapping("/home")
     public String index(Model model, HttpSession session){
         if(session.getAttribute("userAccount") == null || session.getAttribute("userAccount").equals("")){
-            return "redirect:/";
+            //return "redirect:/";
         }
         TimeLog timeLog = new TimeLog();
         model.addAttribute(timeLog);
