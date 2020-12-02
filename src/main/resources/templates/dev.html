@@ -29,9 +29,9 @@
                 <tbody>
 
                 <tr th:each="tl, e:${userTimeLogs}">
-                    <td th:text="${tl.value.key.getName()}"></td>
+                    <td th:text="${tl.value.key.getName().toUpperCase()}"></td>
                     <td th:text="${tl.getKey().getDuration()+' Hours'}"></td>
-                    <td th:text="${tl.value?.value?.getName()}">Client Name</td>
+                    <td th:text="${tl.value?.value?.getName().toUpperCase()}">Client Name</td>
                 </tr>
 
                 </tbody>

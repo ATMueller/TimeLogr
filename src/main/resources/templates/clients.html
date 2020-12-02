@@ -31,10 +31,10 @@
             </thead>
             <tbody>
             <tr th:each="project:${clientProjects}">
-                <td th:text="${project.name}"></td>
+                <td th:text="${project.name.toUpperCase()}"></td>
                 <td th:text="${sums.sumProjectLogsTime(project)+' hours'}"></td>
                 <td th:text="${'$' + sums.sumProjectLogsCost(project)  + ' of $' + project.getBudget()}"></td>
-                <td th:text="${project.description}"></td>
+                <td th:text="${project.description.toUpperCase()}"></td>
                 <td th:text="${project.wage}"></td>
 
                 <td>
