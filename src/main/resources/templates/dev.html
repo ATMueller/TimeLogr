@@ -30,7 +30,7 @@
 
                 <tr th:each="tl, e:${userTimeLogs}">
                     <td th:text="${tl.value.key.getName()}"></td>
-                    <td th:text="${tl.getKey().getDuration()}"></td>
+                    <td th:text="${tl.getKey().getDuration()+' Hours'}"></td>
                     <td th:text="${tl.value?.value?.getName()}">Client Name</td>
                 </tr>
 
@@ -46,7 +46,7 @@
                     <option th:each="ap : ${allProjects}" th:value="${ap.getId()}" th:text="${ap.getName()}"></option>
                 </select>
                 <div class="form-group">
-                    <label for="hoursInput">Enter Time</label>
+                    <label for="hoursInput">Enter Time (hours)</label>
                     <input type="text" class="form-control" id="hoursInput" placeholder="00:00" th:field="*{duration}">
                 </div>
                     <input type="hidden" id="userId" th:attr="name='employeeID'" th:value="${userAccount.getId()}">

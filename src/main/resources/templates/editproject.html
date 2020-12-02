@@ -39,8 +39,8 @@
             <textarea class="form-control" rows="5" id="description" placeholder="Describe the vision of you project" th:field="*{description}" th:value="${project.description}"></textarea>
         </div>
         <div class="form-group">
-            <input type="text" class="ui-helper-hidden" th:field="*{id}" th:value="${project.id}">
-            <input type="text" class="ui-helper-hidden" th:field="*{clientId}" th:value="${project.clientId}">
+            <input type="hidden" id="projectId" th:attr="name='id'" th:value="${project.id}">
+            <input type="hidden" id="clientId" th:attr="name='clientId'" th:value="${project.id}">
 
         </div>
         <button name="submit" value="0" type="submit" class="btn btn-primary">Save</button>

@@ -76,8 +76,8 @@ public class SQL implements TimeLogrDAO {
     }
 
     @Override
-    public List<TimeLog> getProjectLogs(String projectName) {
-        return timeLogRepository.findByProject(projectName);
+    public List<TimeLog> getProjectLogs(int projectId) {
+        return timeLogRepository.findByProjectID(projectId);
     }
 
     @Override
