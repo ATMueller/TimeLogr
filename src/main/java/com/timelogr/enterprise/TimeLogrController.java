@@ -99,7 +99,7 @@ public class TimeLogrController {
      * @return dev.html
      */
     @RequestMapping("/home")
-    public String index(Model model, HttpSession session, Project project, Account account){
+    public String index(Model model, HttpSession session, Project project){
         if(session.getAttribute("userEmail") == null || session.getAttribute("userEmail").equals("")){
             return "redirect:/";
         }
@@ -209,7 +209,7 @@ public class TimeLogrController {
         }
         List<Project> allClientProjects = timeLogrService.getClientProjects(account.getId());
 
-        System.out.println(allClientProjects);
+        System.out.println(timeLogrService.sumProjectLogsTime(getAllProjects().get(0)));
         model.addAttribute("clientProjects", timeLogrService.getClientProjects(account.getId()));
         model.addAttribute("sumTime", timeLogrService);
 

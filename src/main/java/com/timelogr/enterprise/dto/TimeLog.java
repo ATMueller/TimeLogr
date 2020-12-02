@@ -12,6 +12,9 @@ public @Data class TimeLog {
     private int clientID;
     private int projectID;
     private int employeeID;
+    private String client;
+    private String project;
     private long date;
     private long duration;
+    private long emp_id;
 }

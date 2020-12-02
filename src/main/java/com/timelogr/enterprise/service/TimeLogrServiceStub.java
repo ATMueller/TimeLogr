@@ -86,7 +86,7 @@ public class TimeLogrServiceStub implements TimeLogrService {
             System.out.println("Time: " +time);
         }
         ans[0] = time;
-        double wage = project.getWage();
+        double wage = project.getWage().doubleValue();
         cost = time * wage;
         ans[1] = cost;
         return ans;
