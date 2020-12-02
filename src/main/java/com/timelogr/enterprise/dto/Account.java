@@ -3,9 +3,12 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
 import lombok.Data;
 import org.junit.platform.commons.util.ToStringBuilder;
-import javax.validation.constraints.*;
+
 
 
 @Entity @Table(name = "ACCOUNT")

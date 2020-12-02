@@ -25,12 +25,12 @@
         </div>
         <div class="form-group">
             <label for="newProjectBudget">Project Budget</label>
-            <input type="text" class="form-control" id="newProjectBudget" placeholder="Project Budget" th:field="*{budget}">
+            <input type="text" class="form-control" id="newProjectBudget" value="0.0" th:field="*{budget}">
             <small class="text-danger" th:if="${#fields.hasErrors('budget')}" th:errors="*{budget}">Full name error</small>
         </div>
         <div class="form-group">
             <label for="newProjectWage">Developer Wage</label>
-            <input type="text" class="form-control" id="newProjectWage" placeholder="0.00$ per hour" th:field="*{wage}">
+            <input type="text" class="form-control" id="newProjectWage" value="0.0" th:field="*{wage}">
             <small class="text-danger" th:if="${#fields.hasErrors('wage')}" th:errors="*{wage}">Full name error</small>
         </div>
         <div class="form-group">

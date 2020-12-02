@@ -3,6 +3,7 @@ import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
 import com.timelogr.enterprise.dto.Account;
 import com.timelogr.enterprise.service.TimeLogrService;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Validate;
 import org.owasp.esapi.ESAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import org.springframework.validation.BindingResult;
 import java.util.List;
 
 @Controller
@@ -173,13 +172,16 @@ public class TimeLogrController {
         model.addAttribute(project);
         List<Account> allAccounts = timeLogrService.getAllAccounts();
         List<Account> allEmployees = null;
+        System.out.println("===============================");
         return "newproject";
     }
 
     @RequestMapping(value ="/saveProject", method = RequestMethod.POST)
-    public String saveProject(@Validated @ModelAttribute("project") Project project, Account account, Errors errors, HttpSession session) {
+    public String saveProject(@Validated @ModelAttribute("project") Project project, Errors errors, HttpSession session) {
         Object userEmail = session.getAttribute("userEmail");
+        System.out.println(errors.getErrorCount());
         Account userAccount = timeLogrService.findAccountByEmail(userEmail.toString());
+        System.out.println("===============================");
         System.out.println(errors.getErrorCount());
         if (null != errors && errors.getErrorCount() > 0) {
             return "newproject";

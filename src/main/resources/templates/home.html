@@ -47,22 +47,15 @@
         <div class="panel-right">
             <h4>Developer Time Logger</h4>
             <form action="#" th:action="@{/saveTimeLog}" th:object="${timeLog}" method="GET">
-                <div class="form-group">
-                    <label for="clientInput">Client</label>
-                    <input type="text" class="form-control" id="clientInput" placeholder="Client" th:field="*{client}">
-                </div>
-                <div class="form-group">
-                    <label for="projectInput">Project</label>
-                    <input type="text" class="form-control" id="projectInput" placeholder="Project" th:field="*{project}">
-                </div>
-                <div class="form-group">
-                    <label for="hoursInput">Enter Time</label>
-                    <input type="text" class="form-control" id="hoursInput" placeholder="00:00" th:field="*{duration}">
-                </div>
                 <select class="form-control" th:field="*{id}"  id="dropOperator">
                     <option value="0">Select Project</option>
                     <option th:each="allProjects : ${allProjects}" th:value="${allProjects.getId()}" th:text="${allProjects.getName()}"></option>
                 </select>
+                <div class="form-group">
+                    <label for="hoursInput">Enter Time</label>
+                    <input type="text" class="form-control" id="hoursInput" placeholder="00:00" th:field="*{duration}">
+                </div>
+
                 <button name="submit" value="0" type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
