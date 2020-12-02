@@ -4,6 +4,7 @@ import com.timelogr.enterprise.dto.Account;
 import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface TimeLogrService {
@@ -28,7 +29,9 @@ public interface TimeLogrService {
 
     List<Project> getClientProjects (int client);
 
-    double[] sumProjectLogsTime (Project project);
+    BigDecimal sumProjectLogsTime (Project project);
+
+    BigDecimal sumProjectLogsCost (Project project);
 
     Project getProjectById(int projectId);
 }

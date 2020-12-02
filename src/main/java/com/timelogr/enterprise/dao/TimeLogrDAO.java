@@ -26,7 +26,7 @@ public interface TimeLogrDAO {
 
     List<Project> getClientProjects(int client);
 
-    List<TimeLog> getProjectLogs (String projectName);
+    List<TimeLog> getProjectLogs (int projectId);
 
     Project getProjectById(int projectId);
 

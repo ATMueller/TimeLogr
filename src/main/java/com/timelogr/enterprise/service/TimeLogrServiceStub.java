@@ -8,6 +8,7 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,22 +76,33 @@ public class TimeLogrServiceStub implements TimeLogrService {
     }
 
     @Override
-    public double[] sumProjectLogsTime(Project project) {
-        double time = 0;
-        double cost = 0;
+    public BigDecimal sumProjectLogsTime(Project project) {
+            BigDecimal time = new BigDecimal("0");
+//        double cost = 0;
 
-        double[] ans = new double[2];
-        Iterable<TimeLog> logs = timelogrDAO.getProjectLogs(project.getName());
+        // double[] ans = new double[2];
+
+        Iterable<TimeLog> logs = timelogrDAO.getProjectLogs(project.getId());
         for (TimeLog timeLog : logs) {
-            time = time + timeLog.getDuration();
+            time = time.add(BigDecimal.valueOf(timeLog.getDuration()));
             System.out.println("Time: " +time);
         }
-        ans[0] = time;
-        double wage = project.getWage().doubleValue();
-        cost = time * wage;
-        ans[1] = cost;
-        return ans;
+//        ans[0] = time;
+//        double wage = project.getWage().doubleValue();
+//        cost = time * wage;
+//        ans[1] = cost;
+        return time;
     }
+
+    @Override
+    public BigDecimal sumProjectLogsCost(Project project) {
+        BigDecimal totalTime = sumProjectLogsTime(project);
+        BigDecimal cost = new BigDecimal("0.00");
+        cost = project.getWage();
+        cost = cost.multiply(totalTime);
+        return cost;
+    }
+
 
     @Override
     public Project getProjectById(int projectId) {

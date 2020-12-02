@@ -92,7 +92,7 @@ public class TimeLogrDAOstub implements TimeLogrDAO {
     }
 
     @Override
-    public List<TimeLog> getProjectLogs(String projectName) {
+    public List<TimeLog> getProjectLogs(int projectId) {
         return null;
     }
 
