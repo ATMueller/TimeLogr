@@ -17,18 +17,26 @@
 <div th:replace="fragments/topnav :: navbar-dev"></div>
 <div class="content-container">
 <h1>Add New or Modify Project</h1>
-    <form class="center-form" action="#" th:action="@{/saveProject}" th:object="${project}" method="GET">
+    <form class="center-form" action="#" th:action="@{/saveProject}" th:object="${project}" th:method="POST">
         <div class="form-group">
             <label for="newProjectName">Project Name</label>
             <input type="text" class="form-control" id="newProjectName" placeholder="Project Name" th:field="*{name}">
+            <small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Full name error</small>
         </div>
         <div class="form-group">
             <label for="newProjectBudget">Project Budget</label>
             <input type="text" class="form-control" id="newProjectBudget" placeholder="Project Budget" th:field="*{budget}">
+            <small class="text-danger" th:if="${#fields.hasErrors('budget')}" th:errors="*{budget}">Full name error</small>
         </div>
         <div class="form-group">
-            <label for="newProjectEstHours">Estimated Hours</label>
-            <input type="text" class="form-control" id="newProjectEstHours" placeholder="00:00" th:field="*{hours}">
+            <label for="newProjectWage">Developer Wage</label>
+            <input type="text" class="form-control" id="newProjectWage" placeholder="0.00$ per hour" th:field="*{wage}">
+            <small class="text-danger" th:if="${#fields.hasErrors('wage')}" th:errors="*{wage}">Full name error</small>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <small class="d-block text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Full name error</small>
+            <textarea class="form-control" rows="5" id="description" placeholder="Describe the vision of you project" th:field="*{description}"></textarea>
         </div>
         <button name="submit" value="0" type="submit" class="btn btn-primary">Save</button>
     </form>

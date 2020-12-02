@@ -59,10 +59,10 @@
                     <label for="hoursInput">Enter Time</label>
                     <input type="text" class="form-control" id="hoursInput" placeholder="00:00" th:field="*{duration}">
                 </div>
-                <div class="form-group">
-                    <label for="idInput">Project ID</label>
-                    <input type="text" class="form-control" id="idInput" placeholder="00:00" th:field="*{id}">
-                </div>
+                <select class="form-control" th:field="*{id}"  id="dropOperator">
+                    <option value="0">Select Project</option>
+                    <option th:each="allProjects : ${allProjects}" th:value="${allProjects.getId()}" th:text="${allProjects.getName()}"></option>
+                </select>
                 <button name="submit" value="0" type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

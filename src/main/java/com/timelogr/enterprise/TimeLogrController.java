@@ -73,7 +73,7 @@ public class TimeLogrController {
             for (Account temp : acclist) {
                 if (temp.getEmail().equals(account.getEmail()) && temp.getPassword().equals(account.getPassword())) {
                     Account userAccount = timeLogrService.findAccountByEmail(temp.getEmail());
-                    session.setAttribute("userAccount", userAccount);
+                    session.setAttribute("userEmail", userAccount.getEmail());
                     return "redirect:home";
                 }
             }
@@ -92,13 +92,14 @@ public class TimeLogrController {
      * @return home.html
      */
     @RequestMapping("/home")
-    public String index(Model model, HttpSession session){
-        if(session.getAttribute("userAccount") == null || session.getAttribute("userAccount").equals("")){
+    public String index(Model model, HttpSession session, Project project){
+        if(session.getAttribute("userEmail") == null || session.getAttribute("userEmail").equals("")){
             return "redirect:/";
         }
         TimeLog timeLog = new TimeLog();
         model.addAttribute(timeLog);
         model.addAttribute("allLogs", timeLogrService.getAllLoggedTime());
+        model.addAttribute("allProjects", timeLogrService.getAllProjects());
         return "home";
     }
 
@@ -161,25 +162,33 @@ public class TimeLogrController {
     }
 
     @RequestMapping("/newproject")
-    public String NewProject(Model model) {
-        Project project = new Project();
+    public String NewProject(Model model,Project project, HttpSession session, Account account) {
+        if(session.getAttribute("userEmail") == null || session.getAttribute("userEmail").equals("")){
+            return "redirect:/";
+        }
+        Object userEmail = session.getAttribute("userEmail");
+        account = timeLogrService.findAccountByEmail(userEmail.toString());
+        List<Project> allProjects = timeLogrService.getAllProjects();
+        System.out.println(allProjects);
         model.addAttribute(project);
         List<Account> allAccounts = timeLogrService.getAllAccounts();
         List<Account> allEmployees = null;
-        for(Account temp : allAccounts){
-            if(temp.getType().equals("employee")){
-                allEmployees.add(temp);
-            }
-        }
-
-        model.addAttribute("employees",allEmployees);
         return "newproject";
     }
 
-    @RequestMapping("/saveProject")
-    public String NewProject(Project project) {
-        timeLogrService.saveProject(project);
-        return "redirect:";
+    @RequestMapping(value ="/saveProject", method = RequestMethod.POST)
+    public String saveProject(@Validated @ModelAttribute("project") Project project, Account account, Errors errors, HttpSession session) {
+        Object userEmail = session.getAttribute("userEmail");
+        Account userAccount = timeLogrService.findAccountByEmail(userEmail.toString());
+        System.out.println(errors.getErrorCount());
+        if (null != errors && errors.getErrorCount() > 0) {
+            return "newproject";
+        }else {
+            System.out.println(userAccount);
+            project.setClientId(userAccount.getId());
+            timeLogrService.saveProject(project);
+            return "redirect:/newproject";
+        }
     }
 
     @RequestMapping("/projectdetails")
