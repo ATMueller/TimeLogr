@@ -131,7 +131,12 @@ public class TimeLogrController {
 
         Account userAccount = timeLogrService.findAccountByEmail(session.getAttribute("userEmail").toString());
         List<TimeLog> allLoggedTime = timeLogrService.getAllLoggedTime();
+        System.out.println(allLoggedTime);
         Map<TimeLog, Map.Entry<Project, Account>> timelogOut = new HashMap<>();
+        if(!allLoggedTime.isEmpty()) {
+            //return "dev";
+        }
+
         System.out.println(timeLogrService.findAccountById(userAccount.getId()));
         for(TimeLog temp : allLoggedTime){
             if(temp.getEmployeeID() == userAccount.getId()){
@@ -140,6 +145,7 @@ public class TimeLogrController {
                 timelogOut.put(temp,new AbstractMap.SimpleEntry(tempProject, timeLogrService.findAccountById(tempProject.getClientId())));
             }
         }
+
         System.out.println(allLoggedTime);
         System.out.println(timelogOut);
         System.out.println(userAccount.getId());
@@ -153,8 +159,11 @@ public class TimeLogrController {
 
     @RequestMapping("/saveTimeLog")
     public String saveTimeLog(TimeLog timeLog,Model model) {
-        timeLogrService.saveLog(timeLog);
-        return "redirect:/home";
+        if(timeLog.getProjectID() != 0){
+            timeLogrService.saveLog(timeLog);
+        }
+
+        return "redirect:/dev";
     }
 
     @PostMapping(value= "/d", consumes="application/json", produces="application/json")
@@ -209,7 +218,6 @@ public class TimeLogrController {
         }
         List<Project> allClientProjects = timeLogrService.getClientProjects(account.getId());
 
-        System.out.println(timeLogrService.sumProjectLogsTime(getAllProjects().get(0)));
         model.addAttribute("clientProjects", timeLogrService.getClientProjects(account.getId()));
         model.addAttribute("sumTime", timeLogrService);
 
