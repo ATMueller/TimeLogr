@@ -1,4 +1,6 @@
 package com.timelogr.enterprise;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
 import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
 import com.timelogr.enterprise.dto.Account;
@@ -8,6 +10,7 @@ import org.owasp.esapi.ESAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -133,10 +136,6 @@ public class TimeLogrController {
         List<TimeLog> allLoggedTime = timeLogrService.getAllLoggedTime();
         System.out.println(allLoggedTime);
         Map<TimeLog, Map.Entry<Project, Account>> timelogOut = new HashMap<>();
-        if(!allLoggedTime.isEmpty()) {
-            //return "dev";
-        }
-
         System.out.println(timeLogrService.findAccountById(userAccount.getId()));
         for(TimeLog temp : allLoggedTime){
             if(temp.getEmployeeID() == userAccount.getId()){
@@ -273,6 +272,36 @@ public class TimeLogrController {
 
     }
 
+
+    @GetMapping(value ="/pullJson/{type}/",produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String pullJson(@PathVariable("type") String type, Model model){
+        Map<TimeLog, Map.Entry<Project, Account>> timelogOut = new HashMap<>();
+        Gson gson = new Gson();
+        String json;
+        if(type.equals("account") || type.isEmpty()){
+            List<Account> allAccounts =timeLogrService.getAllAccounts();
+            json = gson.toJson(allAccounts);
+        }
+        else if(type.equals("Project")){
+            List<Project> allProjects =timeLogrService.getAllProjects();
+            json = gson.toJson(allProjects);
+        }
+        else if(type.equals("timelog")){
+            List<TimeLog> allTimeLog =timeLogrService.getAllLoggedTime();
+            json = gson.toJson(allTimeLog);
+        }
+        else{
+            json = "Please enter a Variable type( account || project || timelog  ) in the URL";
+        }
+
+
+        List<TimeLog> allTimeLog =timeLogrService.getAllLoggedTime();
+
+
+
+        System.out.println(json);
+        return json;
+    }
 
 
 }
