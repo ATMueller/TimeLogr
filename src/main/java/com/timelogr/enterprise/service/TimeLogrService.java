@@ -25,4 +25,10 @@ public interface TimeLogrService {
     Account findAccountById(Integer id);
 
     Project findProjectById(Integer id);
+
+    List<Project> getClientProjects (int client);
+
+    double[] sumProjectLogsTime (Project project);
+
+    Project getProjectById(int projectId);
 }

@@ -7,6 +7,8 @@ import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Validat
 import org.owasp.esapi.ESAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.util.AbstractMap;
 import java.util.HashMap;
+import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -93,13 +96,36 @@ public class TimeLogrController {
      *
      * MAIN PAGE ONLY RETURNS AFTER LOGIN
      * AND ALL FUNCTIONS RELATED TO THE HOME PAGE
-     * @return home.html
+     * @return dev.html
      */
     @RequestMapping("/home")
     public String index(Model model, HttpSession session, Project project, Account account){
         if(session.getAttribute("userEmail") == null || session.getAttribute("userEmail").equals("")){
             return "redirect:/";
         }
+        Object userEmail = session.getAttribute("userEmail");
+        Account account = timeLogrService.findAccountByEmail(userEmail.toString());
+        System.out.println("getTyped: " + account.getType());
+        if(account.getType().equals("employee")) {
+            return "redirect:/dev";
+        }
+        else {
+            return "redirect:/clients";
+        }
+    }
+
+    @RequestMapping("/dev")
+    public String dev(Model model, HttpSession session, Project project){
+        if(session.getAttribute("userEmail") == null || session.getAttribute("userEmail").equals("")){
+            return "redirect:/";
+        }
+        Object userEmail = session.getAttribute("userEmail");
+        Account account = timeLogrService.findAccountByEmail(userEmail.toString());
+        System.out.println("type: " + account.getType());
+        if(account.getType().equals("client")) {
+            return "redirect:/clients";
+        }
+
         TimeLog timeLog = new TimeLog();
         model.addAttribute(timeLog);
 
@@ -122,7 +148,7 @@ public class TimeLogrController {
         model.addAttribute("allAccounts", timeLogrService.getAllAccounts());
         model.addAttribute("allLogs", timeLogrService.getAllLoggedTime());
         model.addAttribute("allProjects", timeLogrService.getAllProjects());
-        return "home";
+        return "dev";
     }
 
     @RequestMapping("/saveTimeLog")
@@ -170,11 +196,23 @@ public class TimeLogrController {
         return timeLogrService.getAllProjects();
     }
 
-
-
     @RequestMapping("/clients")
-    public String Clients(Model model){
-        // model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
+    public String Clients(Model model,Project project, HttpSession session, Account account) {
+        if(session.getAttribute("userEmail") == null || session.getAttribute("userEmail").equals("")){
+            return "redirect:/";
+        }
+        Object userEmail = session.getAttribute("userEmail");
+        account = timeLogrService.findAccountByEmail(userEmail.toString());
+        System.out.println("type: " + account.getType());
+        if(account.getType().equals("employee")) {
+            return "redirect:/dev";
+        }
+        List<Project> allClientProjects = timeLogrService.getClientProjects(account.getId());
+
+        System.out.println(allClientProjects);
+        model.addAttribute("clientProjects", timeLogrService.getClientProjects(account.getId()));
+        model.addAttribute("sumTime", timeLogrService);
+
         return "clients";
     }
 
@@ -213,14 +251,18 @@ public class TimeLogrController {
             System.out.println(userAccount);
             project.setClientId(userAccount.getId());
             timeLogrService.saveProject(project);
-            return "redirect:/newproject";
+            return "redirect:/clients";
         }
     }
 
-    @RequestMapping("/projectdetails")
-    public String projectdetails(Model model){
-        // model.addAttribute("employee", this.timeLogrServices.GetAllEmployees());
-        return "projectdetails";
+
+    @GetMapping("/editproject/{projectId}/")
+    public ModelAndView specimensByPlant(@PathVariable("projectId") int projectId) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("editproject");
+        modelAndView.addObject("project", timeLogrService.getProjectById(projectId));
+        return  modelAndView;
+
     }
 
 

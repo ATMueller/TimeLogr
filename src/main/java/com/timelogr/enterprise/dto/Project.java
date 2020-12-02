@@ -24,15 +24,12 @@ public @Data class Project {
     @DecimalMin(value ="0.1", message = "Please enter a Wage")
     private BigDecimal wage;
 
-
     private int clientId;
 
     @DecimalMin(value ="0.1", message = "Please enter a Budget")
     private BigDecimal budget;
 
-
-    private double hours;
-
     @NotEmpty(message = "Please enter a Description")
     private String description;
+
 }

@@ -24,6 +24,12 @@ public interface TimeLogrDAO {
 
     Account findAccountByEmail(String email);
 
+    List<Project> getClientProjects(int client);
+
+    List<TimeLog> getProjectLogs (String projectName);
+
+    Project getProjectById(int projectId);
+
     Account findAccountById(Integer id);
 
     Project findProjectById(Integer id);

@@ -85,4 +85,20 @@ public class TimeLogrDAOstub implements TimeLogrDAO {
         }
         return null;
     }
+
+    @Override
+    public List<Project> getClientProjects(int client) {
+        return null;
+    }
+
+    @Override
+    public List<TimeLog> getProjectLogs(String projectName) {
+        return null;
+    }
+
+    @Override
+    public Project getProjectById(int projectId) {
+        return null;
+    }
+
 }
