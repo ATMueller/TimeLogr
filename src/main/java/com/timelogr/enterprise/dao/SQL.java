@@ -70,5 +70,15 @@ public class SQL implements TimeLogrDAO {
         return accountRepository.findAccountByEmail(email);
     }
 
+    @Override
+    public Account findAccountById(Integer id) {
+        return accountRepository.findAccountById(id);
+    }
+
+    @Override
+    public Project findProjectById(Integer id) {
+        return projectRepository.findProjectById(id);
+    }
+
 
 }

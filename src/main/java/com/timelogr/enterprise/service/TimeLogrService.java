@@ -21,4 +21,8 @@ public interface TimeLogrService {
     List<Account> getAllAccounts();
 
     Account findAccountByEmail(String email);
+
+    Account findAccountById(Integer id);
+
+    Project findProjectById(Integer id);
 }

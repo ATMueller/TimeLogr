@@ -24,4 +24,8 @@ public interface TimeLogrDAO {
 
     Account findAccountByEmail(String email);
 
+    Account findAccountById(Integer id);
+
+    Project findProjectById(Integer id);
+
 }

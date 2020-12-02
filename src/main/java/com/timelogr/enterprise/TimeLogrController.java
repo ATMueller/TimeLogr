@@ -20,6 +20,7 @@ import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 @Controller
 public class TimeLogrController {
@@ -104,12 +105,20 @@ public class TimeLogrController {
 
         Account userAccount = timeLogrService.findAccountByEmail(session.getAttribute("userEmail").toString());
         List<TimeLog> allLoggedTime = timeLogrService.getAllLoggedTime();
-        Map<TimeLog, Map.Entry<Project, Account>> timelogOut = new HashMap<TimeLog, Map.Entry<Project, Account>>();
+        Map<TimeLog, Map.Entry<Project, Account>> timelogOut = new HashMap<>();
+        System.out.println(timeLogrService.findAccountById(userAccount.getId()));
         for(TimeLog temp : allLoggedTime){
             if(temp.getEmployeeID() == userAccount.getId()){
-                //timelogOut.put(temp,new AbstractMap.SimpleEntry<>())
+                Project tempProject =timeLogrService.findProjectById(temp.getProjectID());
+
+                timelogOut.put(temp,new AbstractMap.SimpleEntry(tempProject, timeLogrService.findAccountById(tempProject.getClientId())));
             }
         }
+        System.out.println(allLoggedTime);
+        System.out.println(timelogOut);
+        System.out.println(userAccount.getId());
+        model.addAttribute("userAccount", userAccount);
+        model.addAttribute("userTimeLogs", timelogOut);
         model.addAttribute("allAccounts", timeLogrService.getAllAccounts());
         model.addAttribute("allLogs", timeLogrService.getAllLoggedTime());
         model.addAttribute("allProjects", timeLogrService.getAllProjects());
@@ -117,9 +126,9 @@ public class TimeLogrController {
     }
 
     @RequestMapping("/saveTimeLog")
-    public String saveTimeLog(TimeLog timeLog) {
+    public String saveTimeLog(TimeLog timeLog,Model model) {
         timeLogrService.saveLog(timeLog);
-        return "redirect:";
+        return "redirect:/home";
     }
 
     @PostMapping(value= "/d", consumes="application/json", produces="application/json")
@@ -180,10 +189,11 @@ public class TimeLogrController {
             return "redirect:/";
         }
         Object userEmail = session.getAttribute("userEmail");
-        account = timeLogrService.findAccountByEmail(userEmail.toString());
+        Account userAccount = timeLogrService.findAccountByEmail(userEmail.toString());
         List<Project> allProjects = timeLogrService.getAllProjects();
         System.out.println(allProjects);
         model.addAttribute(project);
+        model.addAttribute("userAccount", userAccount);
         List<Account> allAccounts = timeLogrService.getAllAccounts();
         List<Account> allEmployees = null;
         System.out.println("===============================");

@@ -63,4 +63,26 @@ public class TimeLogrDAOstub implements TimeLogrDAO {
         }
         return null;
     }
+
+    @Override
+    public Account findAccountById(Integer id) {
+        List<Account> allAcc = new ArrayList<>(allAccounts.values());
+        for(Account temp : allAcc){
+            if(temp.getId() == id){
+                return temp;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Project findProjectById(Integer id) {
+        List<Project> allProjects = new ArrayList<>(getAllProjects());
+        for(Project temp: allProjects){
+            if(temp.getId() == id){
+                return temp;
+            }
+        }
+        return null;
+    }
 }
