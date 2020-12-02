@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class TimeLogrController {
@@ -91,12 +95,22 @@ public class TimeLogrController {
      * @return home.html
      */
     @RequestMapping("/home")
-    public String index(Model model, HttpSession session, Project project){
+    public String index(Model model, HttpSession session, Project project, Account account){
         if(session.getAttribute("userEmail") == null || session.getAttribute("userEmail").equals("")){
             return "redirect:/";
         }
         TimeLog timeLog = new TimeLog();
         model.addAttribute(timeLog);
+
+        Account userAccount = timeLogrService.findAccountByEmail(session.getAttribute("userEmail").toString());
+        List<TimeLog> allLoggedTime = timeLogrService.getAllLoggedTime();
+        Map<TimeLog, Map.Entry<Project, Account>> timelogOut = new HashMap<TimeLog, Map.Entry<Project, Account>>();
+        for(TimeLog temp : allLoggedTime){
+            if(temp.getEmployeeID() == userAccount.getId()){
+                //timelogOut.put(temp,new AbstractMap.SimpleEntry<>())
+            }
+        }
+        model.addAttribute("allAccounts", timeLogrService.getAllAccounts());
         model.addAttribute("allLogs", timeLogrService.getAllLoggedTime());
         model.addAttribute("allProjects", timeLogrService.getAllProjects());
         return "home";
