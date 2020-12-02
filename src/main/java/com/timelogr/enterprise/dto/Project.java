@@ -21,15 +21,12 @@ public @Data class Project {
     @Min(value = 1, message = "Please set a wage")
     private double wage;
 
-
     private int clientId;
 
     @Min(value = 1, message = "Please set a budget")
     private double budget;
 
-
-    private double hours;
-
     @NotEmpty(message = "Please enter a Description")
     private String description;
+
 }

@@ -21,4 +21,10 @@ public interface TimeLogrService {
     List<Account> getAllAccounts();
 
     Account findAccountByEmail(String email);
+
+    List<Project> getClientProjects (int client);
+
+    double[] sumProjectLogsTime (Project project);
+
+    Project getProjectById(int projectId);
 }

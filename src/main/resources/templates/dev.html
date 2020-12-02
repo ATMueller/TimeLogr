@@ -17,7 +17,7 @@
 
     <div class="dashboard-content">
         <div class="panel-left">
-            <h3>My Recent Projects</h3>
+            <h3>Recent Logs</h3>
             <table class="table table-striped table-light">
                 <thead>
                 <tr>
@@ -35,9 +35,6 @@
                     <td th:text="${timeLog.duration}"></td>
                     <td th:text="${timeLog.client}">Client Name</td>
                     <td th:text="${timeLog.project}">Project Name</td>
-                    <td>
-                        <a role="button" th:href="@{projectdetails}" class="btn btn-secondary">Project Details</a>
-                    </td>
                 </tr>
 
                 </tbody>
@@ -66,10 +63,6 @@
                 <button name="submit" value="0" type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
-    </div>
-
-    <div class="center-form">
-        Development notes: this is the most functional page of our site that illustrates saving time log data and showing the total time log list
     </div>
 
 </body>

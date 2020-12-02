@@ -8,6 +8,8 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -56,6 +58,34 @@ public class TimeLogrServiceStub implements TimeLogrService {
 
     @Override
     public Account findAccountByEmail(String email) { return timelogrDAO.findAccountByEmail(email); }
+
+    @Override
+    public List<Project> getClientProjects(int client) {
+        return timelogrDAO.getClientProjects(client);
+    }
+
+    @Override
+    public double[] sumProjectLogsTime(Project project) {
+        double time = 0;
+        double cost = 0;
+
+        double[] ans = new double[2];
+        Iterable<TimeLog> logs = timelogrDAO.getProjectLogs(project.getName());
+        for (TimeLog timeLog : logs) {
+            time = time + timeLog.getDuration();
+            System.out.println("Time: " +time);
+        }
+        ans[0] = time;
+        double wage = project.getWage();
+        cost = time * wage;
+        ans[1] = cost;
+        return ans;
+    }
+
+    @Override
+    public Project getProjectById(int projectId) {
+        return timelogrDAO.getProjectById(projectId);
+    }
 
 
 }
