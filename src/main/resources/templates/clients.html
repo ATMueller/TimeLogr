@@ -32,8 +32,8 @@
             <tbody>
             <tr th:each="project:${clientProjects}">
                 <td th:text="${project.name}"></td>
-                <td th:text="${sums.sumProjectLogsTime(project)}"></td>
-                <td th:text="${'$' + sums.sumProjectLogsCost(project)  + ' of $' + project.getBudget()}"></td>
+                <td th:text="${sumTime.sumProjectLogsTime(project)[0]}"></td>
+                <td th:text="${'$' + sumTime.sumProjectLogsTime(project)[1]  + ' of $' + project.getBudget()}"></td>
                 <td th:text="${project.description}"></td>
                 <td th:text="${project.wage}"></td>
 

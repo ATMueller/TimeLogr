@@ -1,4 +1,6 @@
 package com.timelogr.enterprise;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
 import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
 import com.timelogr.enterprise.dto.Account;
@@ -8,6 +10,7 @@ import org.owasp.esapi.ESAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import lombok.extern.slf4j.Slf4j;
-import org.hibernate.*;
 
-@Slf4j
 @Controller
 public class TimeLogrController {
 
@@ -53,6 +53,7 @@ public class TimeLogrController {
     */
     @RequestMapping(value ="/create-account",method = RequestMethod.POST)
     public String saveAccount(@Validated @ModelAttribute("account") Account account, Errors errors, Model model, HttpSession session) {
+        System.out.println(errors);
         List<Account> acclist = timeLogrService.getAllAccounts();
         for (Account temp : acclist) {
             if(temp.getEmail().equals(account.getEmail())){
@@ -62,7 +63,7 @@ public class TimeLogrController {
                 session.setAttribute("modal", 1);
             }
         }
-        log.error(String.valueOf(errors));
+        System.out.println(errors);
         if (null != errors && errors.getErrorCount() > 0) {
             return "login";
         } else {
@@ -107,6 +108,7 @@ public class TimeLogrController {
         }
         Object userEmail = session.getAttribute("userEmail");
         Account account = timeLogrService.findAccountByEmail(userEmail.toString());
+        System.out.println("getTyped: " + account.getType());
         if(account.getType().equals("employee")) {
             return "redirect:/dev";
         }
@@ -122,6 +124,7 @@ public class TimeLogrController {
         }
         Object userEmail = session.getAttribute("userEmail");
         Account account = timeLogrService.findAccountByEmail(userEmail.toString());
+        System.out.println("type: " + account.getType());
         if(account.getType().equals("client")) {
             return "redirect:/clients";
         }
@@ -131,7 +134,9 @@ public class TimeLogrController {
 
         Account userAccount = timeLogrService.findAccountByEmail(session.getAttribute("userEmail").toString());
         List<TimeLog> allLoggedTime = timeLogrService.getAllLoggedTime();
+        System.out.println(allLoggedTime);
         Map<TimeLog, Map.Entry<Project, Account>> timelogOut = new HashMap<>();
+        System.out.println(timeLogrService.findAccountById(userAccount.getId()));
         for(TimeLog temp : allLoggedTime){
             if(temp.getEmployeeID() == userAccount.getId()){
                 Project tempProject =timeLogrService.findProjectById(temp.getProjectID());
@@ -139,6 +144,10 @@ public class TimeLogrController {
                 timelogOut.put(temp,new AbstractMap.SimpleEntry(tempProject, timeLogrService.findAccountById(tempProject.getClientId())));
             }
         }
+
+        System.out.println(allLoggedTime);
+        System.out.println(timelogOut);
+        System.out.println(userAccount.getId());
         model.addAttribute("userAccount", userAccount);
         model.addAttribute("userTimeLogs", timelogOut);
         model.addAttribute("allAccounts", timeLogrService.getAllAccounts());
@@ -149,8 +158,11 @@ public class TimeLogrController {
 
     @RequestMapping("/saveTimeLog")
     public String saveTimeLog(TimeLog timeLog,Model model) {
-        timeLogrService.saveLog(timeLog);
-        return "redirect:/home";
+        if(timeLog.getProjectID() != 0){
+            timeLogrService.saveLog(timeLog);
+        }
+
+        return "redirect:/dev";
     }
 
     @PostMapping(value= "/d", consumes="application/json", produces="application/json")
@@ -199,13 +211,14 @@ public class TimeLogrController {
         }
         Object userEmail = session.getAttribute("userEmail");
         account = timeLogrService.findAccountByEmail(userEmail.toString());
+        System.out.println("type: " + account.getType());
         if(account.getType().equals("employee")) {
             return "redirect:/dev";
         }
         List<Project> allClientProjects = timeLogrService.getClientProjects(account.getId());
 
         model.addAttribute("clientProjects", timeLogrService.getClientProjects(account.getId()));
-        model.addAttribute("sums", timeLogrService);
+        model.addAttribute("sumTime", timeLogrService);
 
         return "clients";
     }
@@ -223,20 +236,26 @@ public class TimeLogrController {
         Object userEmail = session.getAttribute("userEmail");
         Account userAccount = timeLogrService.findAccountByEmail(userEmail.toString());
         List<Project> allProjects = timeLogrService.getAllProjects();
+        System.out.println(allProjects);
         model.addAttribute(project);
         model.addAttribute("userAccount", userAccount);
         List<Account> allAccounts = timeLogrService.getAllAccounts();
         List<Account> allEmployees = null;
+        System.out.println("===============================");
         return "newproject";
     }
 
     @RequestMapping(value ="/saveProject", method = RequestMethod.POST)
     public String saveProject(@Validated @ModelAttribute("project") Project project, Errors errors, HttpSession session) {
         Object userEmail = session.getAttribute("userEmail");
+        System.out.println(errors.getErrorCount());
         Account userAccount = timeLogrService.findAccountByEmail(userEmail.toString());
+        System.out.println("===============================");
+        System.out.println(errors.getErrorCount());
         if (null != errors && errors.getErrorCount() > 0) {
             return "newproject";
         }else {
+            System.out.println(userAccount);
             project.setClientId(userAccount.getId());
             timeLogrService.saveProject(project);
             return "redirect:/clients";
@@ -253,6 +272,36 @@ public class TimeLogrController {
 
     }
 
+
+    @GetMapping(value ="/pullJson",produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String pullJson(@PathVariable("type") String type, Model model){
+        Map<TimeLog, Map.Entry<Project, Account>> timelogOut = new HashMap<>();
+        Gson gson = new Gson();
+        String json;
+        if(type.equals("account") || type.isEmpty()){
+            List<Account> allAccounts =timeLogrService.getAllAccounts();
+            json = gson.toJson(allAccounts);
+        }
+        else if(type.equals("Project")){
+            List<Project> allProjects =timeLogrService.getAllProjects();
+            json = gson.toJson(allProjects);
+        }
+        else if(type.equals("timelog")){
+            List<TimeLog> allTimeLog =timeLogrService.getAllLoggedTime();
+            json = gson.toJson(allTimeLog);
+        }
+        else{
+            json = "Please enter a Variable type( account || project || timelog  ) in the URL";
+        }
+
+
+        List<TimeLog> allTimeLog =timeLogrService.getAllLoggedTime();
+
+
+
+        System.out.println(json);
+        return json;
+    }
 
 
 }

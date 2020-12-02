@@ -3,7 +3,6 @@ package com.timelogr.enterprise.dto;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity @Table (name = "TIMELOG")
 public @Data class TimeLog {
