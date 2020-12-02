@@ -19,10 +19,6 @@
 <h1>Add New or Modify Project</h1>
     <form class="center-form" action="#" th:action="@{/saveProject}" th:object="${project}" method="GET">
         <div class="form-group">
-            <label for="newProjectClient">Client</label>
-            <input type="text" class="form-control" id="newProjectClient" placeholder="Project Owner" th:field="*{client}">
-        </div>
-        <div class="form-group">
             <label for="newProjectName">Project Name</label>
             <input type="text" class="form-control" id="newProjectName" placeholder="Project Name" th:field="*{name}">
         </div>
@@ -33,10 +29,6 @@
         <div class="form-group">
             <label for="newProjectEstHours">Estimated Hours</label>
             <input type="text" class="form-control" id="newProjectEstHours" placeholder="00:00" th:field="*{hours}">
-        </div>
-        <div class="form-group">
-            <label for="newProjectID">Project ID</label>
-            <input type="text" class="form-control" id="newProjectID" placeholder="00:00" th:field="*{id}">
         </div>
         <button name="submit" value="0" type="submit" class="btn btn-primary">Save</button>
     </form>

@@ -84,11 +84,11 @@
                         <small class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Full name error</small>
                     </div>
                     <div class="form-check-inline">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked th:field="*{type}">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="employee" checked th:field="*{type}">
                         <label class="form-check-label" for="exampleRadios1">Developer</label>
                     </div>
                     <div class="form-check-inline">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" th:field="*{type}">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="client" th:field="*{type}">
                         <label class="form-check-label" for="exampleRadios2">Client</label>
                     </div>
                     <small class="text-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Full name error</small>

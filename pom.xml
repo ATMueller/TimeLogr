@@ -96,6 +96,13 @@ starter-validation -->
             <artifactId>spring-boot-starter-validation</artifactId>
             <version>2.4.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/xalan/xalan -->
+        <dependency>
+            <groupId>xalan</groupId>
+            <artifactId>xalan</artifactId>
+            <version>2.7.2</version>
+        </dependency>
+
 
     </dependencies>
 

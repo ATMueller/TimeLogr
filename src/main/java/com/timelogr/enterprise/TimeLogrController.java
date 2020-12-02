@@ -1,5 +1,4 @@
 package com.timelogr.enterprise;
-
 import com.timelogr.enterprise.dto.Project;
 import com.timelogr.enterprise.dto.TimeLog;
 import com.timelogr.enterprise.dto.Account;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -96,7 +94,7 @@ public class TimeLogrController {
     @RequestMapping("/home")
     public String index(Model model, HttpSession session){
         if(session.getAttribute("userAccount") == null || session.getAttribute("userAccount").equals("")){
-            //return "redirect:/";
+            return "redirect:/";
         }
         TimeLog timeLog = new TimeLog();
         model.addAttribute(timeLog);
@@ -166,6 +164,15 @@ public class TimeLogrController {
     public String NewProject(Model model) {
         Project project = new Project();
         model.addAttribute(project);
+        List<Account> allAccounts = timeLogrService.getAllAccounts();
+        List<Account> allEmployees = null;
+        for(Account temp : allAccounts){
+            if(temp.getType().equals("employee")){
+                allEmployees.add(temp);
+            }
+        }
+
+        model.addAttribute("employees",allEmployees);
         return "newproject";
     }
 
